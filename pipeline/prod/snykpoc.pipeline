@@ -1,0 +1,25 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Scan') {
+      steps {
+        echo 'Building...'
+      }
+    }
+    stage('Test') {
+      steps {
+        echo 'Testing...'
+        snykSecurity(
+          snykInstallation: 'snyk_poc',
+          snykTokenId: '64ac0ba0-f584-418b-8ffb-4fe62c03a25d',
+        )
+      }
+    }
+    stage('Deploy') {
+      steps {
+        echo 'Deploying...'
+      }
+    }
+  }
+}
